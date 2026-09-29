@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 22% 89%;
+    --foreground: 40 24% 10%;
+    --card: 40 33% 94%;
+    --card-foreground: 40 24% 10%;
+    --popover: 40 33% 94%;
+    --popover-foreground: 40 24% 10%;
+    --primary: 40 24% 10%;
+    --primary-foreground: 40 22% 95%;
+    --secondary: 38 16% 80%;
+    --secondary-foreground: 40 24% 10%;
+    --muted: 38 16% 82%;
+    --muted-foreground: 34 7% 38%;
+    --accent: 13 65% 48%;
+    --accent-foreground: 40 22% 97%;
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 40 22% 97%;
+    --border: 35 18% 76%;
+    --input: 35 18% 76%;
+    --ring: 13 65% 48%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  section[id],
+  footer[id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  body {
+    background-color: #ede8e0;
+    color: #17150f;
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgba(201, 75, 42, 0.85);
+    color: #f5f1ea;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #ede8e0;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #b8ac99;
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #17150f;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #c94b2a;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* Brillo que cruza el botón */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-sheen::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+  }
+  .btn-sheen:hover::after {
+    left: 130%;
+  }
+
+  /* Subrayado de marcador industrial */
+  .text-mark {
+    position: relative;
+    display: inline;
+    background-image: linear-gradient(transparent 62%, rgba(201, 75, 42, 0.9) 62%, rgba(201, 75, 42, 0.9) 96%, transparent 96%);
+  }
+
+  /* Franja ocupada en la rejilla de horas */
+  .slot-occupied {
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgba(23, 21, 15, 0.5) 0px,
+      rgba(23, 21, 15, 0.5) 3px,
+      transparent 3px,
+      transparent 8px
+    );
+  }
+
+  .day-option,
+  .slot-option,
+  .service-option {
+    transition: all 0.2s ease;
+  }
+  .day-option:hover,
+  .slot-option:hover,
+  .service-option:hover {
+    transform: translateY(-1px);
+  }
+  .slot-option:disabled:hover,
+  .day-option:focus-visible,
+  .service-option:focus-visible {
+    transform: none;
+  }
+
+  /* Conector visual entre pasos del formulario */
+  .step-badge {
+    background: #17150f;
+    color: #ede8e0;
+  }
+
+  /* Estado SELECCIONADO de día / hora / servicio */
+  .seleccionado {
+    background: #c94b2a !important;
+    border-color: #17150f !important;
+    box-shadow:
+      0 0 0 1px rgba(23, 21, 15, 0.3),
+      0 6px 20px -8px rgba(23, 21, 15, 0.45) !important;
+  }
+  .seleccionado,
+  .seleccionado span {
+    color: #f5f1ea !important;
+  }
+
+  /* Tarjetas con elevación suave */
+  .card-lift {
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px -28px rgba(23, 21, 15, 0.3);
+  }
+
+  /* Punto separador decorativo */
+  .dot-divider {
+    background-image: radial-gradient(circle, rgba(23, 21, 15, 0.4) 1px, transparent 1px);
+    background-size: 14px 14px;
+    background-repeat: repeat-x;
+    height: 12px;
+  }
+
+  /* Revelado de secciones al hacer scroll */
+  .reveal-target {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease;
+  }
+  .reveal-target.reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-target {
+      opacity: 1;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+}
